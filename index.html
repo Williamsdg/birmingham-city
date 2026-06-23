@@ -75,30 +75,40 @@ header.stuck .nav{height:74px}
 .crest svg{width:29px;height:29px;transition:.3s}
 header.stuck .crest{width:44px;height:44px}
 header.stuck .crest svg{width:24px;height:24px}
-.brand .name{font-family:var(--display);font-weight:800;font-size:1.22rem;color:var(--navy);line-height:1.04;letter-spacing:-.01em;transition:font-size .3s}
+.brand-lines{display:flex;flex-direction:column;gap:4px}
+.brand .name{font-family:var(--display);font-weight:800;font-size:1.24rem;color:var(--navy);line-height:1;letter-spacing:-.01em;transition:font-size .3s}
 header.stuck .brand .name{font-size:1.08rem}
-.brand .tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--magic);font-weight:800}
-.brand .sub{display:block;font-size:.74rem;color:var(--gray-500);font-weight:500;margin-top:2px}
+.brand .tag{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--magic);font-weight:800;line-height:1}
+.brand .sub{font-size:.72rem;color:var(--gray-500);font-weight:500;line-height:1;letter-spacing:.01em}
+header.stuck .brand-lines{gap:3px}
 header.stuck .brand .sub{display:none}
 .nav-links{display:flex;align-items:center;gap:6px}
-.nav-links>a,.has-mega>.mega-trigger{display:inline-flex;align-items:center;gap:5px;font-size:.97rem;font-weight:600;color:var(--gray-700);transition:.2s;padding:10px 13px;border-radius:10px;cursor:pointer;background:none;border:0;font-family:inherit}
-.nav-links>a:hover,.has-mega:hover>.mega-trigger,.has-mega.open>.mega-trigger{color:var(--blue);background:var(--blue-soft)}
+.nav-links>a,.has-mega>.mega-trigger{position:relative;display:inline-flex;align-items:center;gap:5px;font-size:.97rem;font-weight:600;color:var(--gray-700);transition:color .2s;padding:10px 13px;border-radius:10px;cursor:pointer;background:none;border:0;font-family:inherit}
+/* sliding blue underline */
+.nav-links>a::after,.has-mega>.mega-trigger::after{content:"";position:absolute;left:13px;right:13px;bottom:4px;height:2px;border-radius:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .26s cubic-bezier(.4,0,.2,1)}
+.nav-links>a:hover,.has-mega:hover>.mega-trigger,.has-mega.open>.mega-trigger{color:var(--blue)}
+.nav-links>a:hover::after,.has-mega:hover>.mega-trigger::after,.has-mega.open>.mega-trigger::after{transform:scaleX(1)}
 .mega-trigger svg.car{width:13px;height:13px;transition:transform .25s}
 .has-mega:hover .mega-trigger svg.car{transform:rotate(180deg)}
 .nav-tools{display:flex;align-items:center;gap:12px}
 /* search pill */
-.nav-search{display:inline-flex;align-items:center;gap:9px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:999px;padding:10px 16px;color:var(--gray-500);font-weight:500;font-size:.92rem;cursor:pointer;transition:.2s;white-space:nowrap}
+.nav-search{display:inline-flex;align-items:center;gap:7px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:999px;padding:8px 13px;color:var(--gray-500);font-weight:500;font-size:.84rem;cursor:pointer;transition:.2s;white-space:nowrap}
 .nav-search:hover{border-color:var(--blue);color:var(--blue);background:#fff}
-.nav-search svg{width:16px;height:16px}
-.nav-search .kbd{margin-left:6px;font-size:.7rem;background:var(--gray-200);border-radius:5px;padding:2px 6px;color:var(--gray-600);font-weight:600}
+.nav-search svg{width:15px;height:15px}
+.nav-search .kbd{margin-left:5px;font-size:.66rem;background:var(--gray-200);border-radius:5px;padding:2px 5px;color:var(--gray-600);font-weight:600}
 .nav-search-icon{display:none;background:none;border:0;cursor:pointer;color:var(--navy);padding:8px}
 .nav-search-icon svg{width:22px;height:22px}
 /* pay button — now navy, secondary weight */
-.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:.92rem;padding:11px 20px;border-radius:11px;transition:.2s;border:1px solid var(--navy)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;font-weight:700;font-size:.9rem;padding:11px 18px;border-radius:11px;transition:.2s;border:1px solid var(--navy);white-space:nowrap}
 .nav-cta:hover{background:var(--navy-2);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.nav-cta-ghost{background:transparent;color:var(--navy);border-color:var(--gray-300)}
+.nav-cta-ghost:hover{background:var(--blue-soft);border-color:var(--blue);color:var(--blue)}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{display:block;width:25px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px;transition:.3s}
 .nav-mobile-pay{display:none}
+
+/* hide the desktop My Birmingham earlier so it never crowds the nav */
+@media(max-width:1240px){.nav-desk-portal{display:none}}
 
 /* ---------- Mega menus ---------- */
 .has-mega{position:relative}
@@ -154,7 +164,8 @@ header.stuck .brand .sub{display:none}
   .burger{display:block}
   .brand .sub{display:none}
   .nav-desk-pay{display:none}
-  .nav-mobile-pay{display:flex}
+  .nav-mobile-pay{display:flex;justify-content:center;margin-top:10px;padding:14px;border-bottom:0}
+  .nav-mobile-portal{margin-top:14px}
 }
 @media(max-width:560px){.mega-grid,.mega-grid.three{grid-template-columns:1fr}}
 
@@ -191,6 +202,30 @@ header.stuck .brand .sub{display:none}
 .hero-dots{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:9px}
 .hero-dots button{width:9px;height:9px;border-radius:50%;border:0;background:rgba(255,255,255,.4);cursor:pointer;transition:.25s;padding:0}
 .hero-dots button.on{background:#fff;width:26px;border-radius:99px}
+
+/* ---------- Today-in-Birmingham snapshot strip ---------- */
+.snapshot{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.snapshot::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 140% at 88% -20%,rgba(246,178,25,.22),transparent 55%);pointer-events:none}
+.snapshot .wrap{position:relative;display:flex;align-items:center;gap:30px;padding:22px 28px;flex-wrap:wrap}
+.snap-head{display:flex;flex-direction:column;gap:6px;flex:none}
+.snap-live{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:var(--gold)}
+.snap-live .led{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(246,178,25,.6);animation:p 2.4s infinite}
+.snap-head h2{color:#fff;font-size:1.45rem;letter-spacing:-.02em}
+.snap-stats{display:flex;align-items:stretch;gap:0;flex:1;flex-wrap:wrap}
+.snap-stat{display:flex;flex-direction:column;gap:3px;padding:0 26px;position:relative;justify-content:center}
+.snap-stat+.snap-stat::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:32px;background:rgba(255,255,255,.14)}
+.snap-stat .sv{font-family:var(--display);font-weight:800;font-size:1.7rem;line-height:1;color:#fff}
+.snap-stat .sv.ok{color:var(--green);font-size:1.5rem}
+.snap-stat .sl{font-size:.76rem;color:rgba(255,255,255,.66);font-weight:600}
+.snap-cta{flex:none;display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:var(--navy);font-weight:800;font-size:.92rem;padding:13px 22px;border-radius:12px;transition:.2s}
+.snap-cta:hover{background:#ffc848;transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+.snap-cta svg{width:17px;height:17px}
+@media(max-width:1080px){.snapshot .wrap{gap:20px}.snap-cta{order:3}}
+@media(max-width:720px){
+  .snap-stat{padding:0 16px}
+  .snap-stat .sv{font-size:1.4rem}
+  .snap-cta{width:100%;justify-content:center}
+}
 @media(max-width:560px){.hero-actions a{font-size:.96rem;padding:14px 18px}}
 
 /* ---------- Section heads ---------- */
@@ -762,13 +797,16 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
 .reveal.in{opacity:1;transform:none}
 
 /* spec banner */
-.spec{background:var(--gold-soft);border-bottom:1px solid #f0dba8;text-align:center;font-size:.8rem;color:#8a5a00;padding:8px 16px;font-weight:600}
-.spec a{color:#8a5a00;text-decoration:underline}
+.spec{display:flex;align-items:center;justify-content:center;gap:10px;background:#faf6ee;border-bottom:1px solid #ece3d2;text-align:center;font-size:.72rem;color:var(--gray-500);padding:6px 16px;font-weight:500;letter-spacing:.01em}
+.spec-badge{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--navy);background:#fff;border:1px solid #e4dcc9;border-radius:999px;padding:3px 9px}
+.spec-txt a{color:var(--gray-600);text-decoration:underline;text-underline-offset:2px;font-weight:600}
+.spec-txt a:hover{color:var(--blue)}
+@media(max-width:520px){.spec-txt{font-size:.68rem}}
 </style>
 </head>
 <body>
 
-<div class="spec">Concept redesign — not affiliated with the City of Birmingham. Built by <a href="https://williamsdigital.io">Williams Digital</a> to demonstrate a modern, task-first civic platform.</div>
+<div class="spec"><span class="spec-badge">Preview</span><span class="spec-txt">Concept redesign by <a href="https://williamsdigital.io">Williams Digital</a>. Not affiliated with the City of Birmingham.</span></div>
 
 <!-- official bar -->
 <div class="gov-bar">
@@ -778,13 +816,13 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
       <span>An official concept for a City of Birmingham website</span>
     </div>
     <div class="right">
-      <a href="#services"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span class="lbl-long">24/7&nbsp;</span>City Services</a>
+      <a href="#services" title="311 — City services & non-emergency requests"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16.5A8.5 8.5 0 1 1 7.5 4.2"/><path d="M21 4v5h-5"/><path d="M12 8v4l3 1.5"/></svg>311</a>
       <span class="div"></span>
       <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Language</a>
       <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4.5" r="2"/><path d="M4 8h16M12 8v6m0 0-3.5 6m3.5-6 3.5 6"/></svg>Accessibility</a>
       <a href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="m4 6 8 6 8-6"/></svg>Contact</a>
       <span class="div"></span>
-      <a href="#" class="emergency"><span class="dot"></span>🚨&nbsp;<span class="lbl-long">Emergency&nbsp;</span>Alerts</a>
+      <a href="#" class="emergency"><span class="dot"></span>🚨&nbsp;Emergency</a>
     </div>
   </div>
 </div>
@@ -794,10 +832,10 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
   <div class="wrap nav">
     <a class="brand" href="#top">
       <span class="crest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 3 7v2h18V7l-9-5Zm-7 9v7H4v3h16v-3h-1v-7h-2v7h-3v-7h-2v7H9v-7H7v7H5v-7H5Zm0 0"/></svg></span>
-      <span>
+      <span class="brand-lines">
         <span class="name">City of Birmingham</span>
         <span class="tag">The Magic City</span>
-        <span class="sub">Serving Alabama's largest city</span>
+        <span class="sub">Serving Alabama's Largest City</span>
       </span>
     </a>
     <nav class="nav-links" id="navLinks">
@@ -891,16 +929,18 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
       <a href="#events">Events</a>
       <a href="#news">News</a>
       <a href="#map">Map</a>
+      <a href="#" class="nav-cta nav-cta-ghost nav-mobile-pay nav-mobile-portal"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>My Birmingham</a>
       <a href="#pay" class="nav-cta nav-mobile-pay"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 4v8h16V9H4Zm2 4h6v2H6v-2Z"/></svg>Pay a Bill</a>
     </nav>
     <div class="nav-tools">
       <button class="nav-search" type="button" onclick="document.querySelector('.hero .searchbar input')?.focus();document.getElementById('top')?.scrollIntoView({behavior:'smooth'})" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <span class="lbl">Search services…</span><span class="kbd">⌘K</span>
+        <span class="lbl">Search services, departments, permits…</span><span class="kbd">⌘K</span>
       </button>
       <button class="nav-search-icon" type="button" onclick="document.querySelector('.hero .searchbar input')?.focus();document.getElementById('top')?.scrollIntoView({behavior:'smooth'})" aria-label="Search">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
       </button>
+      <a href="#" class="nav-cta nav-cta-ghost nav-desk-portal"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>My Birmingham</a>
       <a href="#pay" class="nav-cta nav-desk-pay"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 4v8h16V9H4Zm2 4h6v2H6v-2Z"/></svg>Pay a Bill</a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -910,9 +950,9 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
 <!-- live city status ribbon -->
 <div class="status-ribbon" id="statusRibbon">
   <div class="wrap">
-    <span class="sr-item"><span class="led g"></span> No active weather alerts</span>
-    <span class="sr-item"><span class="ic">🚧</span> 3 active road closures <a href="#map">View map →</a></span>
-    <span class="sr-item"><span class="led b"></span> 📅 City Council Meeting · July 10</span>
+    <span class="sr-item"><span class="led g"></span> 🟢 Weather: Normal</span>
+    <span class="sr-item"><span class="ic">🚧</span> Road Work: 3 Active Projects <a href="#map">View map →</a></span>
+    <span class="sr-item"><span class="led b"></span> 🏛 Council Meeting · July 10 · 9:30 AM</span>
     <span class="sr-item"><span class="led y"></span> 🎆 Independence Day Celebration · July 4</span>
   </div>
 </div>
@@ -948,6 +988,24 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
   <div class="hero-dots" id="heroDots"></div>
 </section>
 
+<!-- TODAY-IN-BIRMINGHAM snapshot strip (the "wow") -->
+<section class="snapshot" aria-label="Today in Birmingham">
+  <div class="wrap">
+    <div class="snap-head">
+      <span class="snap-live"><span class="led"></span> Live</span>
+      <h2>Today in Birmingham</h2>
+    </div>
+    <div class="snap-stats">
+      <div class="snap-stat"><span class="sv">81°</span><span class="sl">Weather · Clear</span></div>
+      <div class="snap-stat"><span class="sv">3</span><span class="sl">Road Projects</span></div>
+      <div class="snap-stat"><span class="sv">42</span><span class="sl">Events This Week</span></div>
+      <div class="snap-stat"><span class="sv">94%</span><span class="sl">311 Resolved</span></div>
+      <div class="snap-stat"><span class="sv ok">Good</span><span class="sl">Air Quality</span></div>
+    </div>
+    <a class="snap-cta" href="#today">Open the city dashboard <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
 <!-- TODAY'S BIRMINGHAM dashboard -->
 <section class="sec dashboard" id="today">
   <div class="dash-skyline"></div>
@@ -955,7 +1013,7 @@ footer{background:var(--navy);color:#aebfd2;padding:72px 0 130px;font-size:.92re
     <div class="dash-head">
       <div class="sec-head" style="margin-bottom:0">
         <div class="kicker">City Operations</div>
-        <h2>Today in Birmingham</h2>
+        <h2>The City Dashboard</h2>
         <p style="margin-top:10px">Everything happening across the city, updated in real time — now showing <strong id="nhoodInline" style="color:var(--navy)">Downtown</strong>.</p>
       </div>
       <div class="nhood" id="nhood">
