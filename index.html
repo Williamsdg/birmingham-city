@@ -55,6 +55,8 @@ section{scroll-margin-top:110px}
 .gov-bar{background:var(--navy);color:#cfe0f0;font-size:.8rem;border-bottom:1px solid rgba(255,255,255,.06)}
 .gov-bar .wrap{display:flex;align-items:center;justify-content:space-between;height:40px;gap:18px}
 .gov-bar .left,.gov-bar .right{display:flex;align-items:center;gap:4px}
+.gov-bar .left{gap:8px;font-weight:500}
+.gov-bar .left>svg{width:14px;height:14px;flex:none;opacity:.8}
 .gov-bar a{display:inline-flex;align-items:center;gap:7px;color:#cfe0f0;font-weight:500;padding:6px 12px;border-radius:8px;transition:.18s;white-space:nowrap}
 .gov-bar a svg{width:14px;height:14px;opacity:.85}
 .gov-bar a:hover{color:#fff;background:rgba(255,255,255,.08)}
@@ -68,24 +70,27 @@ section{scroll-margin-top:110px}
 /* ---------- Header ---------- */
 header{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-200);transition:box-shadow .3s,background .3s}
 header.stuck{box-shadow:0 12px 30px -18px rgba(8,32,58,.28);background:rgba(255,255,255,.97)}
-.nav{display:flex;align-items:center;justify-content:space-between;height:106px;gap:20px;transition:height .3s}
+.nav{display:flex;align-items:center;justify-content:space-between;height:106px;gap:18px;transition:height .3s}
+.nav-links{flex:1;justify-content:center}
+.nav-tools{flex:none}
 header.stuck .nav{height:74px}
 .brand{display:flex;align-items:center;gap:14px}
 .crest{width:54px;height:54px;border-radius:15px;background:linear-gradient(150deg,var(--navy),var(--blue));display:grid;place-items:center;color:var(--gold);flex:none;box-shadow:var(--shadow-sm);transition:width .3s,height .3s}
 .crest svg{width:29px;height:29px;transition:.3s}
 header.stuck .crest{width:44px;height:44px}
 header.stuck .crest svg{width:24px;height:24px}
-.brand-lines{display:flex;flex-direction:column;gap:4px}
+.brand{flex:none}
+.brand-lines{display:flex;flex-direction:column;gap:4px;white-space:nowrap}
 .brand .name{font-family:var(--display);font-weight:800;font-size:1.24rem;color:var(--navy);line-height:1;letter-spacing:-.01em;transition:font-size .3s}
 header.stuck .brand .name{font-size:1.08rem}
 .brand .tag{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--magic);font-weight:800;line-height:1}
 .brand .sub{font-size:.72rem;color:var(--gray-500);font-weight:500;line-height:1;letter-spacing:.01em}
 header.stuck .brand-lines{gap:3px}
 header.stuck .brand .sub{display:none}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-links>a,.has-mega>.mega-trigger{position:relative;display:inline-flex;align-items:center;gap:5px;font-size:.97rem;font-weight:600;color:var(--gray-700);transition:color .2s;padding:10px 13px;border-radius:10px;cursor:pointer;background:none;border:0;font-family:inherit}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links>a,.has-mega>.mega-trigger{position:relative;display:inline-flex;align-items:center;gap:4px;font-size:.93rem;font-weight:600;color:var(--gray-700);transition:color .2s;padding:10px 11px;border-radius:10px;cursor:pointer;background:none;border:0;font-family:inherit}
 /* sliding blue underline */
-.nav-links>a::after,.has-mega>.mega-trigger::after{content:"";position:absolute;left:13px;right:13px;bottom:4px;height:2px;border-radius:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .26s cubic-bezier(.4,0,.2,1)}
+.nav-links>a::after,.has-mega>.mega-trigger::after{content:"";position:absolute;left:11px;right:11px;bottom:4px;height:2px;border-radius:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .26s cubic-bezier(.4,0,.2,1)}
 .nav-links>a:hover,.has-mega:hover>.mega-trigger,.has-mega.open>.mega-trigger{color:var(--blue)}
 .nav-links>a:hover::after,.has-mega:hover>.mega-trigger::after,.has-mega.open>.mega-trigger::after{transform:scaleX(1)}
 .mega-trigger svg.car{width:13px;height:13px;transition:transform .25s}
@@ -108,7 +113,14 @@ header.stuck .brand .sub{display:none}
 .nav-mobile-pay{display:none}
 
 /* hide the desktop My Birmingham earlier so it never crowds the nav */
-@media(max-width:1240px){.nav-desk-portal{display:none}}
+/* progressive header collapse — keep the bar from overflowing */
+@media(max-width:1400px){
+  .nav-search{display:none}
+  .nav-search-icon{display:block}
+}
+@media(max-width:1180px){
+  .nav-desk-portal{display:none} /* drop My Birmingham from the bar; lives in the menu */
+}
 
 /* ---------- Mega menus ---------- */
 .has-mega{position:relative}
@@ -144,10 +156,6 @@ header.stuck .brand .sub{display:none}
 .status-ribbon.alert .sr-item a{color:#fff;text-decoration:underline}
 .status-ribbon.alert .sr-item .led{background:#fff;animation:p 1.6s infinite}
 
-@media(max-width:1180px){
-  .nav-search .lbl,.nav-search .kbd{display:none}
-  .nav-search{padding:11px}
-}
 @media(max-width:1040px){
   .nav{height:84px}
   header.stuck .nav{height:70px}
